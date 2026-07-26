@@ -1,0 +1,28 @@
+# Pythona venv
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# PyCharm
+.idea/
+
+# Data
+data/raw/
+data/bronze/
+data/silver/
+data/gold/
+
+# Env
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+Thumbs.db
