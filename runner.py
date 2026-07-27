@@ -1,8 +1,7 @@
 import argparse
 
 from config.config import START_YEAR, END_YEAR
-from src import find_stations
-from src import download_weather
+from src.api import download_weather, find_stations
 
 CITIES_TO_SEARCH = ["LONDON", "HEATHROW", "NEW YORK", "CENTRAL PARK", "OKECIE", "TOKYO", "CNTRL PK"]
 
