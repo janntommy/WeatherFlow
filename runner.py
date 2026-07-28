@@ -2,6 +2,8 @@ import argparse
 
 from config.config import START_YEAR, END_YEAR
 from src.api import download_weather, find_stations
+from src.spark_session import get_spark_session
+from src.processing import bronze
 
 CITIES_TO_SEARCH = ["LONDON", "HEATHROW", "NEW YORK", "CENTRAL PARK", "OKECIE", "TOKYO", "CNTRL PK"]
 
@@ -36,9 +38,24 @@ def download_weather_data():
     print()
     print(f"Download successful. {len(filepaths)} yearly files available in {download_weather.DIR_PATH}")
 
+
+def run_bronze():
+    spark = get_spark_session()
+
+    df = bronze.read_raw_csv_data(spark)
+    df = bronze.add_year_col(df)
+
+    df.printSchema()
+    df.show(5)
+
+    bronze.write_bronze(df)
+    print(f"Bronze layer written to: {bronze.BRONZE_DIR}")
+    spark.stop()
+
 STEPS = {
     "find_stations": run_find_stations,
-    "download_weather": download_weather_data(),
+    "download_weather": download_weather_data,
+    "bronze": run_bronze
 }
 
 

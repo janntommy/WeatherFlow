@@ -8,8 +8,8 @@ DIR = Path("data/raw/by_year")
 BRONZE_DIR = Path("data/bronze")
 
 my_schema = StructType([
-    StructField("station_id", IntegerType),
-    StructField("date", StringType),
+    StructField("station_id", IntegerType(), nullable=False),
+    StructField("date", StringType(), nullable=False),
     StructField("element", StringType(), nullable=False),
     StructField("value", IntegerType(), nullable=True),
     StructField("m_flag", StringType(), nullable=True),
